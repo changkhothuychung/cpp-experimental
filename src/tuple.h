@@ -5,7 +5,6 @@
 
 namespace nhat 
 {
-
     static constexpr int maximum(int a, int b)
     {
         if (a > b)
