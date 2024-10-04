@@ -23,7 +23,7 @@ namespace nhat
         {
             if(engage)
             {
-                val.~value_tupe(); 
+                val.~value_type(); 
             }
         }
 
@@ -44,7 +44,7 @@ namespace nhat
         {
             if(engage)
             {
-                ::new(std::addressof(val) value_type(std::move(other.val)); 
+                ::new(std::addressof(val)) value_type(std::move(other.val)); 
             }
         }
 
@@ -64,17 +64,22 @@ namespace nhat
 
     };
 
-    template<typename T>
-    struct optional_storage<T, true>
-    {
+    // template<typename T>
+    // struct optional_storage<T, true>
+    // {
 
-    };
+    // };
 
     template<typename T>
     struct optional : public optional_storage<T>
     {
 
+        typedef T value_type;
+        typedef optional_storage<T> base; 
+
         optional(){}
+
+        /*
 
         template<typename... Args>
         void emplace_back(Args&&... args)
@@ -92,7 +97,10 @@ namespace nhat
 
         }
 
-        value_type arrow_operator(){}
+        */
+
+        //value_type arrow_operator(){}
+        
         bool has_value()
         {
             return this->engage; 
@@ -101,6 +109,10 @@ namespace nhat
         template<typename U>
         optional& operator=(U&& u) 
         {
+            // TODO
+            // in case engage is true, forward u 
+            // in case engage is false, use inplace new operator 
+
             this->val = u; 
             this->engage = true; 
         }
