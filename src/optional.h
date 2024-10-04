@@ -7,7 +7,6 @@ namespace nhat
 {
     struct nullopt_t {}; 
 
-
     template<typename T, bool = std::is_trivially_destructible_v<T>>
     struct optional_storage
     {
@@ -17,6 +16,7 @@ namespace nhat
             char null_state; 
             value_type val; 
         };
+
         bool engage = false; 
 
         ~optional_storage()
@@ -32,7 +32,6 @@ namespace nhat
 
         }
 
-        /* 
         optional_storage(const optional_storage& other)
         {
             if(engage)
@@ -40,13 +39,24 @@ namespace nhat
                 ::new(std::addressof(val)) value_type(other.val); 
             }
         }
+
+        
         optional_storage(optional_storage&& other) noexcept(std::is_nothrow_move_constructible<value_type>::value)
         {
-            // TODO
+            if(engage)
+            {
+                ::new(std::addressof(val) value_type(std::move(other.val)); 
+            }
         }
 
-        */
+        
 
+
+    };
+
+    template<typename T>
+    struct optional_storage<T, true>
+    {
 
     };
 
