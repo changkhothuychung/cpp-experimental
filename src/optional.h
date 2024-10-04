@@ -39,7 +39,6 @@ namespace nhat
                 ::new(std::addressof(val)) value_type(other.val); 
             }
         }
-
         
         optional_storage(optional_storage&& other) noexcept(std::is_nothrow_move_constructible<value_type>::value)
         {
@@ -49,6 +48,17 @@ namespace nhat
             }
         }
 
+        /*
+        optional_storage& operator=(const optional_storage& other)
+        {
+
+        }
+
+        optional_storage& operator=(optional_storage&& other) noexcept(std::is_nothrow_move_assignable<value_type>::type)
+        {
+
+        }
+        */
         
 
 
