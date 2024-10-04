@@ -7,7 +7,7 @@ namespace nhat
 {
     struct nullopt_t {}; 
 
-    template<typename T, bool = std::is_trivially_destructible_v<T>>
+    template<typename T>
     struct optional_storage
     {
         typedef T value_type; 
@@ -19,13 +19,16 @@ namespace nhat
 
         bool engage = false; 
 
-        ~optional_storage()
+        ~optional_storage() requires (!std::is_trivially_destructible_v<T>)
         {
             if(engage)
             {
                 val.~value_type(); 
             }
         }
+
+        ~optional_storage() requires (std::is_trivially_destructible_v<T>) = default; 
+        
 
         constexpr optional_storage(): null_state('\0')
         {
@@ -87,17 +90,27 @@ namespace nhat
 
         }
 
-        constexpr value_type value(){}
+        */
 
-        value_type& value(){}
+        constexpr value_type const& value const()
+        {
+            return this->val; 
+        }
 
+        value_type& value()
+        {
+            return this->val; 
+        }
+    
         template<typename U>
         constexpr value_type value_or(U&& u)
         {
-
+            if(this->engage)
+            {
+                return this->val; 
+            }
+            return u; 
         }
-
-        */
 
         //value_type arrow_operator(){}
         
@@ -116,10 +129,6 @@ namespace nhat
             this->val = u; 
             this->engage = true; 
         }
-        /*
-
-        */
-
 
     };
 };
