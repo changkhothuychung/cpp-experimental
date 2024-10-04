@@ -71,7 +71,7 @@ namespace nhat
     };
 
     template<typename T>
-    struct optional : public optional_storage 
+    struct optional : public optional_storage<T>
     {
 
         optional(){}
@@ -83,15 +83,32 @@ namespace nhat
         }
 
         constexpr value_type value(){}
+
         value_type& value(){}
+
         template<typename U>
-        constexpr value_type value_or(U&& u){}
+        constexpr value_type value_or(U&& u)
+        {
+
+        }
 
         value_type arrow_operator(){}
         bool has_value()
         {
             return this->engage; 
         }
+
+        template<typename U>
+        optional& operator=(U&& u) 
+        {
+            this->val = u; 
+            this->engage = true; 
+        }
+        /*
+
+        */
+
+
     };
 };
 
