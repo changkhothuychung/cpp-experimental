@@ -136,10 +136,16 @@ namespace nhat
             // in case engage is true, forward u 
             // in case engage is false, use inplace new operator 
 
-            this->val = u; 
-            this->engage = true; 
+            if(this->engage)
+            {
+                this->val = std::forward<U>(u); 
+            }
+            else
+            {
+                this->engage = true; 
+                ::new(std::addressof(this->val)) value_type(std::forward<U>(u)); 
+            }
         }
-
         optional& operator=(const optional& other)
         {
             return *this; 
