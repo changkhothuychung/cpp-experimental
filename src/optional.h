@@ -4,6 +4,7 @@
 #include <type_traits>
 #include <memory>
 
+
 namespace nhat
 {
     struct nullopt_t {}; 
@@ -120,7 +121,15 @@ namespace nhat
             return this->engage; 
         }
 
-        template<typename U>
+        template<
+                    typename U,
+                    class = typename std::enable_if
+                                     <
+                                        std::is_same<typename std::remove_reference<U>::type, value_type>::value && 
+                                        std::is_assignable<value_type&, U>::value && 
+                                        std::is_constructible<value_type, U>::value
+                                     >::type
+                >
         optional& operator=(U&& u) 
         {
             // TODO
@@ -131,7 +140,10 @@ namespace nhat
             this->engage = true; 
         }
 
-        //optional& operator=(const optional& other) = default; 
+        optional& operator=(const optional& other)
+        {
+            return *this; 
+        }; 
 
     };
 };
