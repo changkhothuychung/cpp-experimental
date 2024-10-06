@@ -2,6 +2,7 @@
 #define NHAT_OPTIONAL 
 
 #include <type_traits>
+#include <memory>
 
 namespace nhat
 {
@@ -92,7 +93,7 @@ namespace nhat
 
         */
 
-        constexpr value_type const& value const()
+        constexpr value_type& value() const 
         {
             return this->val; 
         }
@@ -129,6 +130,8 @@ namespace nhat
             this->val = u; 
             this->engage = true; 
         }
+
+        //optional& operator=(const optional& other) = default; 
 
     };
 };
