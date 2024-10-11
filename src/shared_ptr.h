@@ -1,3 +1,7 @@
+#ifndef NHAT_SHARED_PTR
+#define SHARED_PTR 
+
+
 /* 
 namespace std {
   template<class T> class shared_ptr {
@@ -88,11 +92,17 @@ namespace std {
 
 namespace nhat
 {
+
+    class shared_count {}; 
+
+    class weak_shared_count{}; 
+
     template<typename T> class shared_ptr
     {
-        private:
-
         public: 
+
+            typedef T element_type; 
+            
 
             // constructor 
             constexpr shared_ptr() noexcept;
@@ -102,6 +112,8 @@ namespace nhat
             
             // destructor 
 
-        
     };
 };
+
+
+#endif 
