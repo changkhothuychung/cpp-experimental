@@ -1,7 +1,7 @@
 #include <iostream>
 #include <type_traits>
-#include "src/tuple.h"
-#include "src/optional.h"
+#include "tuple.h"
+#include "optional.h"
 
 int main()
 {
