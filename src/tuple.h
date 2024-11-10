@@ -6,7 +6,16 @@
 namespace nhat 
 {
     template<typename T, typename... Ts> 
-    struct tuple{}; 
+    struct tuple
+    {
+        T value; 
+        tuple<Ts...> rest; 
+
+        constexpr tuple(const T& value, const Ts...& rest): value(value), rest(rest)
+        {
+
+        }
+    }; 
 
     template<typename T> 
     struct tuple
