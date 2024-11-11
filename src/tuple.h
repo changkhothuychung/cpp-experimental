@@ -35,10 +35,10 @@ namespace std {
 
   // [tuple.creation], tuple creation functions
   template<class... TTypes>
-    constexpr tuple<unwrap_ref_decay_t<TTypes>...> make_tuple(TTypes&&...);
+    constexpr tuple<unwrap_ref_decay_t<TTypes>...> make_tuple(TTypes&&...); // added
 
   template<class... TTypes>
-    constexpr tuple<TTypes&&...> forward_as_tuple(TTypes&&...) noexcept;
+    constexpr tuple<TTypes&&...> forward_as_tuple(TTypes&&...) noexcept; 
 
   template<class... TTypes>
     constexpr tuple<TTypes&...> tie(TTypes&...) noexcept;

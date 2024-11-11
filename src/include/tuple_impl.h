@@ -1,8 +1,13 @@
 #ifndef TUPLE_IMPL_H 
 #define TUPLE_IMPL_H 
 
+#include <type_traits> 
+
 namespace nhat 
 {
+    template<typename... Ts> 
+    struct tuple{};
+
     template<typename T, typename... Ts> 
     struct tuple
     {
@@ -57,6 +62,21 @@ namespace nhat
     {
         return get_nth<I, Ts...>::get(t); 
     }
+
+    template<class... TTypes>
+    constexpr tuple<unwrap_ref_decay_t<TTypes>...> make_tuple(TTypes&&... t)
+    {
+        return tuple<unwrap_ref_decay_t<TTypes>...>(std::forward<TTypes>(t)...); 
+    }
+
+    template<class... TTypes>
+    constexpr tuple<TTypes&&...> forward_as_tuple(TTypes&&... t) noexcept 
+    {
+        return tuple<TTypes&&...>(std:;forward<TTypes>(t)...); 
+    }
+
+    template<class F, class Tuple>
+    constexpr decltype(auto) apply(F&& f, Tuple&& t); 
 
 
 };
