@@ -11,17 +11,17 @@ namespace nhat
         T value; 
         tuple<Ts...> rest; 
 
-        constexpr tuple(const T& value, const Ts...& rest): value(value), rest(rest)
+        constexpr tuple(const T& value, const Ts&... rest): value(value), rest(rest...)
         {
 
         }
     }; 
 
     template<typename T> 
-    struct tuple
+    struct tuple<T>
     {
         T value; 
-        constexpr tuple(const T& value) value(value)
+        constexpr tuple(const T& value): value(value)
         {
             
         }
